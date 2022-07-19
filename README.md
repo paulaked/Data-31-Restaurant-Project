@@ -1,5 +1,4 @@
 # Assignment
-
 Author: Rahul Patnala
 
 Complete the `Table` class in `restaurant.py`. It should be able to instantiate objects to represent tables of diners at a restaurant.  When objects are created they are passed in the number of people dining at that table.  The class should have an instance variable called `bill` that is a list.  The class should also contain the following methods:
