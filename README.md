@@ -6,3 +6,5 @@ Complete the `Table` class in `restaurant.py`. It should be able to instantiate 
 - A `get_subtotal` method that returns the total cost for the table based on the prices and quantities in the bill.
 - A `get_total` method that accepts a service charge percentage in the form of a decimal.  If no service charge percentage is provided, it should default to 10% (i.e. `0.10`).  This method should return a dictionary with the following keys: `Sub Total`, `Service Charge`, `Total`.  The values should be string representations of the corresponding prices in British pounds and pence.  e.g. `{"Sub Total": "£120.00", "Service Charge": "£12.00", "Total": "£132.00"}`
 - A `split_bill` method, which returns the the subtotal cost of the bill divided by the number of diners as a float rounded up to the nearest penny.
+
+Author: Hinesh_Tailor
