@@ -19,15 +19,19 @@ class Table:
                 else:
                     return self.bill
 
-
     def get_subtotal(self):
         amount = 0
         for dish in self.bill:
             amount += dish['price'] * dish['quantity']
         return amount
 
-    def get_total(self):
-        pass
+    def get_total(self, tip=0.1):
+        sub_total = self.get_subtotal()
+        service_charge = sub_total * tip
+        total = sub_total + service_charge
+        checkout = {"Sub Total": "£%0.2f" % sub_total, "Service Charge": "£%0.2f" % service_charge,
+                    "Total": "£%0.2f" % total}
+        return checkout
 
     def split_bill(self):
         pass
