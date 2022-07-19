@@ -20,11 +20,15 @@ class Table:
 
         for x in self.bill:
             if x["item"] == item and x["price"] == price:
+                # Remove item if none left.
                 if (x["quantity"] - quantity) == 0:
                     self.bill.remove(x)
                     return True
+                # Invalid if quantity is rendered negative.
                 elif (x["quantity"] - quantity) < 0:
                     return False
+
+                # Otherwise remove specified number of items.
                 else:
                     x["quantity"] -= quantity
                     return True
@@ -42,13 +46,17 @@ class Table:
 
     def get_total(self, service_charge = 0.10):
 
+        # Get values for each.
         subtotal = self.get_subtotal()
         sc_amount = subtotal * service_charge
         total = subtotal+sc_amount
 
+        # Format and return.
         return {"Sub Total": '£{:,.2f}'.format(subtotal),
                      "Service Charge": '£{:,.2f}'.format(sc_amount),
                      "Total": '£{:,.2f}'.format(total)}
 
     def split_bill(self):
+
+        # Divide bill by number of diners and round to nearest penny.
         return round((self.get_subtotal())/self.diners,2)
