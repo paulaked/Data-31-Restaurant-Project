@@ -4,12 +4,12 @@ class Table:
         self.diners = diners
         self.bill = []
 
-    def order(self, item, price, quantity=1):
+    def order(self, item, price, quantity = 1):
 
         # Loop through existing list of items to check item is already there.
-        for x in self.bill:
-            if (x["item"]) == item:
-                x["quantity"] += quantity
+        for order in self.bill:
+            if (order["item"]) == item:
+                order["quantity"] += quantity
                 return
 
         # Add if new item.
@@ -18,19 +18,19 @@ class Table:
 
     def remove(self, item, price, quantity=1):
 
-        for x in self.bill:
-            if x["item"] == item and x["price"] == price:
+        for order in self.bill:
+
+            if order["item"] == item and order["price"] == price:
                 # Remove item if none left.
-                if (x["quantity"] - quantity) == 0:
-                    self.bill.remove(x)
+                if (order["quantity"] - quantity) == 0:
+                    self.bill.remove(order)
                     return True
                 # Invalid if quantity is rendered negative.
-                elif (x["quantity"] - quantity) < 0:
+                elif (order["quantity"] - quantity) < 0:
                     return False
-
-                # Otherwise remove specified number of items.
+                # Otherwise, remove specified number of items.
                 else:
-                    x["quantity"] -= quantity
+                    order["quantity"] -= quantity
                     return True
 
         return False
@@ -39,8 +39,8 @@ class Table:
 
         subtotal = 0
 
-        for x in self.bill:
-            subtotal += (x["price"] * x["quantity"])
+        for order in self.bill:
+            subtotal += (order["price"] * order["quantity"])
 
         return subtotal
 
