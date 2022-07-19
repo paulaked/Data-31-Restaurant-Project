@@ -5,16 +5,15 @@ class Table:
         self.number_of_diners = number_of_diners
 
     def order(self, item, price, quantity=1):
-        return self.bill.append({"item": item, "price": price, "quantity": quantity})
+        self.bill.append({"item": item, "price": price, "quantity": quantity})
 
     def remove(self, item, price, quantity):
         for order in self.bill:
             if self.bill[order]["item"] == item and self.bill[order]["price"] == price:
                 if (self.bill[order]["quantity"] - quantity) >= 1:
                     self.bill[order]["quantity"] -= quantity
-                    return self.bill[order]["quantity"]
                 else:
-                    return self.bill[order].remove()
+                    self.bill[order].remove()
 
     def get_subtotal(self):
         total_price = 0
