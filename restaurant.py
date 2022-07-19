@@ -6,11 +6,13 @@ class Table:
 
     def order(self, item, price, quantity=1):
 
+        # Loop through existing list of items to check item is already there.
         for x in self.bill:
             if (x["item"]) == item:
                 x["quantity"] += quantity
                 return
 
+        # Add if new item.
         menu_item = {"item": item, "price": price, "quantity": quantity}
         self.bill.append(menu_item)
 
@@ -44,11 +46,9 @@ class Table:
         sc_amount = subtotal * service_charge
         total = subtotal+sc_amount
 
-        bill_dict = {"Sub Total": '£{:,.2f}'.format(subtotal),
+        return {"Sub Total": '£{:,.2f}'.format(subtotal),
                      "Service Charge": '£{:,.2f}'.format(sc_amount),
                      "Total": '£{:,.2f}'.format(total)}
-
-        return bill_dict
 
     def split_bill(self):
         return round((self.get_subtotal())/self.diners,2)
