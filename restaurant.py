@@ -21,7 +21,10 @@ class Table:
 
 
     def get_subtotal(self):
-        pass
+        amount = 0
+        for dish in self.bill:
+            amount += dish['price'] * dish['quantity']
+        return amount
 
     def get_total(self):
         pass
