@@ -34,4 +34,5 @@ class Table:
         return checkout
 
     def split_bill(self):
-        pass
+        checkout = self.get_subtotal()
+        return round(checkout / self.customers_number, 2)
