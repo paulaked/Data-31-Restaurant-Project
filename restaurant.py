@@ -14,7 +14,7 @@ class Table:
         for dish in self.bill:
             if dish['item'] == item:
                 dish['quantity'] -= quantity
-                if dish['quantity'] == 0:
+                if dish['quantity'] <= 0:
                     return self.bill.remove(dish)
                 else:
                     return self.bill
