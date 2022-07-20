@@ -7,17 +7,12 @@ class Table:
 
     def order(self, item, price, quantity = 1):
         if item not in self.bill:
-            ordered = {"item": item, "price": price, "quantity": quantity}
-            self.bill.append(ordered)
-        else:
-            for i in self.bill:
-                if i.items() == item:
-                    i.keys(quantity) + 1
+            self.bill.append({"item": item, "price": price, "quantity": quantity})
         return self.bill
 
     def remove(self, item, price, quantity = "1"):
         for key in self.bill:
-            if key["item"]  == item and key["price"] == price and quantity < key["quantity"]:
+            if key["item"]  == item and key["price"] == price and quantity <= key["quantity"]:
                 key["quantity"] -= quantity
             elif key["item"]  == item and key["price"] == price and quantity >= key["quantity"]:
                 key["quantity"] -= quantity
