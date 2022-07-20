@@ -28,7 +28,7 @@ class Table:
                 i['quantity'] -= quantity
                 # removing entry if quantity reaches 0
                 if i['quantity'] <= 0:
-                return self.bill.remove(i)
+                    return self.bill.remove(i)
             elif i['item'] != item and i['price'] != price:
                 return False
             else:
@@ -42,14 +42,15 @@ class Table:
         return subtotal_bill
 
 
-    def get_total(self, service_charge=0.1):
-        subtotal = self.get_subtotal()
-        service_charge_calc = subtotal * service_charge
+    def get_total(self, service_charge=0.10):
+        subtotal = float((self.get_subtotal()), 2)
+        service_charge_calc = float((subtotal * service_charge), 2)
+        the_total = float((subtotal + service_charge_calc), 2)
 
         def_total = {
-            'Sub Total': subtotal,
-            'Service Charge': service_charge_calc,
-            'Total': subtotal + service_charge_calc
+            'Service Charge': f'£{service_charge_calc}',
+            'Sub Total': f'£{subtotal}',
+            'Total': f'£{the_total}'
         }
         return def_total
 
