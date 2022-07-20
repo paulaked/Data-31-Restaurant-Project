@@ -3,27 +3,30 @@ class Table:
         self.tablenumber = tablenumber
         self.bill = []
 
-    def order(self, item:str, price, quantity=1):
+    def order(self, item: str, price, quantity=1):
 
-        if item not in self.bill:
+        if item not in self.bill:  # checking if the item is already on the bill
             cheque = {"item": item, "price": price, "quantity": quantity}
             self.bill.append(cheque)
-        else:
+        else:  # if it is, then adding the quantity
             for food in self.bill:
                 if food.items() == item:
                     food.keys(quantity) + 1
         return self.bill
 
     def remove(self, item, price, quantity):
-        quantity = quantity - self.bill[quantity]
-
-        if quantity == 0:
-            return False
-        if quantity >= 1:
-            return True
+        for key in self.bill: # Checking if the quantity is less than that on the bill
+            if key["item"] == item and key["price"] == price and quantity < key["quantity"]:
+                key["quantity"] -= quantity
+            elif key["item"] == item and key["price"] == price and quantity >= key["quantity"]:
+                self.bill.remove(key)
+            else:
+                return False
 
     def get_subtotal(self):
-        cost_of_meal = self.orderprice * self.orderquantity
+        price = self.bill["price"]
+        quantity = self.bill["quantity"]
+        cost_of_meal = price * quantity
         return cost_of_meal
 
     def get_total(self):
