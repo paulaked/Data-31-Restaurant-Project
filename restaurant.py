@@ -8,6 +8,10 @@ class Table:
     def order(self, item, price, quantity = 1):
         if item not in self.bill:
             self.bill.append({"item": item, "price": price, "quantity": quantity})
+        else:
+            for key in self.bill:
+                if key.items() == item:
+                    key.keys(quantity) + quantity
         return self.bill
 
     def remove(self, item, price, quantity = "1"):
