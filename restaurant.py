@@ -26,7 +26,7 @@ class Table:
     def get_subtotal(self) -> float:
         cost_of_meal = 0
         for i in self.bill:
-            cost_of_meal += (i["price"] * i["quantity"])
+            cost_of_meal += (i["price"] * i["quantity"])  # Adding each person's meal to the subtotal.
         return cost_of_meal
 
     def get_total(self, service_charge=0.10):
@@ -34,9 +34,11 @@ class Table:
         charge_rate = sub_total * service_charge
         total = round((sub_total + charge_rate), 2)
 
-        total_dict = {"Sub Total": '£{:,.2f}'.format(sub_total),
-                      "Service Charge": '£{:,.2f}'.format(charge_rate),
-                      "Total": '£{:,.2f}'.format(total)}
+        # Formatting the totals to return only floats with 2 decimal places
+
+        total_dict = {"Sub Total": '£{:.2f}'.format(sub_total),
+                      "Service Charge": '£{:.2f}'.format(charge_rate),
+                      "Total": '£{:.2f}'.format(total)}
 
         return total_dict
 
