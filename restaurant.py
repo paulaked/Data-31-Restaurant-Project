@@ -43,4 +43,7 @@ class Table:
         return total_dict
 
     def split_bill(self):
-        pass
+        sub_total = self.get_subtotal()
+        split = sub_total / self.tablenumber
+
+        return split
