@@ -33,7 +33,11 @@ class Table:
         return total
 
     def get_total(self, SCharge = 0.1):
-
+        sub_total = self.get_subtotal()
+        service_charge = SCharge * self.get_subtotal()
+        total = self.get_subtotal() + service_charge
+        get_total = {'Sub Total': "£{:.2f}".format(sub_total), 'Service Charge': "£{:.2f}".format(service_charge), 'Total': "£{:.2f}".format(total)}
+        return get_total
 
     def split_bill(self):
         split_total = self.get_subtotal() / self.num_of_customers
