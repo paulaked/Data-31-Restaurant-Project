@@ -21,10 +21,10 @@ class Table:
 
 
 
-    def get_subtotal(self, bill):
-        subtotal = 1
-        for i in bill:
-            subtotal += subtotal*bill[i]
+    def get_subtotal(self):
+        subtotal = 0
+        for item in self.bill:
+            subtotal += (item["price"] * item["quantity"])
         return subtotal
 
 
