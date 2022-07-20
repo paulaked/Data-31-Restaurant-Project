@@ -1,12 +1,12 @@
 class Table:
 
-    def __init__(self, num_of_people):
+    def __init__(self, num_of_customers):
         self.bill = []
-        self.num_of_people = num_of_people
+        self.num_of_customers = num_of_customers
 
 
-    def order(self, item = "food", price = "10.00", quantity = "1"):
-        if item not in self.list:
+    def order(self, item, price, quantity = 1):
+        if item not in self.bill:
             ordered = {"item": item, "price": price, "quantity": quantity}
             self.bill.append(ordered)
         else:
@@ -15,17 +15,22 @@ class Table:
                     i.keys(quantity) + 1
         return self.bill
 
-    def remove(self):
-        pass
+    def remove(self, item, price, quantity = "1"):
+        for key in self.bill:
+            if key["item"]  == item and key["price"] == price and quantity < key["quantity"]:
+                key["quantity"] -= quantity
+            elif key["item"]  == item and key["price"] == price and quantity >= key["quantity"]:
+                key["quantity"] -= quantity
+                key["quantity"] *= -1
+            else:
+                return False
 
     def get_subtotal(self):
-        pass
+     
 
-    def get_total(self):
-        pass
+    def get_total(self, SCharge = 0.1):
 
     def split_bill(self):
-        pass
 
 
 
