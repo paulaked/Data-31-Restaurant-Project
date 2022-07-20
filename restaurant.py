@@ -91,5 +91,5 @@ class Table:
 
         overall_price = self.get_subtotal() #get sub total
 
-        cost_per_diner = overall_price / self.dinners # round() function? 2sf..
-        return cost_per_diner
+        cost_per_diner = overall_price / self.dinners
+        return round(cost_per_diner, 2)
