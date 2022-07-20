@@ -49,24 +49,14 @@ class Table:
 
     def get_total(self, service_charge_percentage: float = 0.1):
 
-        # I ran the sub_total calculations again because I wasn't sure how to get them from above since there is no self.sub_total (i.e. it is not an instance variable).
-
-        sub_total = 0
-        for d in self.bill:
-            sub_total = sub_total + ( float(d['price']) * float(d['quantity']) )
         dict = {
-            "Sub Total": "£" + "{:.2f}".format(sub_total),
-            "Service Charge": "£" + "{:.2f}".format(sub_total * service_charge_percentage),
-            "Total": "£" + "{:.2f}".format(sub_total + (sub_total * service_charge_percentage))
+            "Sub Total": "£" + "{:.2f}".format(self.get_subtotal()),
+            "Service Charge": "£" + "{:.2f}".format(self.get_subtotal() * service_charge_percentage),
+            "Total": "£" + "{:.2f}".format(self.get_subtotal() + (self.get_subtotal() * service_charge_percentage))
         }
         return dict
 
 # when referencing a method from a different method within a class you need to include self.
 
     def split_bill(self):
-        # I ran the sub_total calculations again because I wasn't sure how to get them from above since there is no
-        # self.sub_total (i.e. it is not an instance variable).
-        sub_total = 0
-        for d in self.bill:
-            sub_total = sub_total + ( float(d['price']) * float(d['quantity']) )
-        return(round(sub_total / self.no_people, 2))
+        return(round(self.get_subtotal() / self.no_people, 2))

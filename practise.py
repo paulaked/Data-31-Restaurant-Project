@@ -49,3 +49,19 @@ print(bill[0]["quantity"])
 bill[0]["quantity"] = str(int(bill[0]["quantity"]) + 2)
 
 print(bill)
+
+class Practise:
+    def __init__(self, no_people):
+        #self.bill = []
+        self.no_people = no_people
+
+    def sub_total_practise(self):
+        sub_total_practise_value = self.no_people * 20
+        return sub_total_practise_value
+
+    def total_practise(self):
+        total_practise_value = self.sub_total_practise() + 100
+        return total_practise_value
+
+print(Practise(10).sub_total_practise())
+print(Practise(10).total_practise())
