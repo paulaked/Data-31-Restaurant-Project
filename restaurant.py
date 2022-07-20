@@ -26,12 +26,18 @@ class Table:
                 return False
 
     def get_subtotal(self):
-     
+        total = 0
+        for key in self.bill:
+            currunt_price = key['quantity'] * key['price']
+            total += currunt_price
+        return total
 
     def get_total(self, SCharge = 0.1):
 
-    def split_bill(self):
 
+    def split_bill(self):
+        split_total = self.get_subtotal() / self.num_of_customers
+        return split_total
 
 
 
