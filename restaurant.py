@@ -1,14 +1,14 @@
 
 class Table:
-    def __init__(self, number_of_diners: int):
+    def __init__(self, number_of_diners: int) -> None:
         self.bill = []
         self.number_of_diners = number_of_diners
 
-    def order(self, item, price, quantity=1):
+    def order(self, item: str, price: float, quantity=1):
         self.bill.append({"item": item, "price": price, "quantity": quantity})
         return self.bill
 
-    def remove(self, item, price, quantity):
+    def remove(self, item: str, price: float, quantity: int) -> bool:
         for order in self.bill:
             if order["item"] == item and order["price"] == price:
                 if (order["quantity"] - quantity) >= 1:
@@ -18,13 +18,13 @@ class Table:
                 return True
         return False
 
-    def get_subtotal(self):
+    def get_subtotal(self) -> float:
         total_price = 0
         for order in self.bill:
             total_price += order["price"] * order["quantity"]
         return float("{:.2f}".format(total_price))
 
-    def get_total(self, service_charge=0.1):
+    def get_total(self, service_charge=0.1) -> dict:
         sub_total = self.get_subtotal()
         total_price = sub_total * (1 + service_charge)
         return {'Sub Total': f"£{'{:.2f}'.format(sub_total)}", 
@@ -32,7 +32,7 @@ class Table:
                 'Total': f"£{'{:.2f}'.format(total_price)}"}
         
 
-    def split_bill(self):
+    def split_bill(self) -> float:
         sub_total = self.get_subtotal()
         split = sub_total / self.number_of_diners
         return float("{:.2f}".format(split))
