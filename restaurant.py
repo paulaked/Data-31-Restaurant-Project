@@ -20,44 +20,41 @@ class Table:
 
     def remove(self, item, price, quantity=1):
         for i in self.bill:
-            # catching quantity error first
-            if quantity > i['quantity']:
-                return False
-            # removing quantity
-            elif i['item'] == item and i['price'] == price:
-                i['quantity'] -= quantity
-                # removing entry if quantity reaches 0
+            if i['item'] == item and i['price'] == price:
+                # remove from bill if reaches zero
                 if i['quantity'] <= 0:
-                    return self.bill.remove(i)
-            elif i['item'] != item and i['price'] != price:
-                return False
-            else:
-                return True
+                    self.bill.remove(i)
+                    return True
+                # catching wrong input
+                elif quantity > i['quantity']:
+                    return False
+                # altering bill quantity
+                else:
+                    i['quantity'] -= quantity
+                    return True
 
 
     def get_subtotal(self):
         subtotal_bill = 0
+        # calculating subtotal
         for i in self.bill:
             subtotal_bill += (i['price'] * i['quantity'])
         return subtotal_bill
 
 
     def get_total(self, service_charge=0.10):
-        subtotal = float((self.get_subtotal()), 2)
-        service_charge_calc = float((subtotal * service_charge), 2)
-        the_total = float((subtotal + service_charge_calc), 2)
+        # calculating service charge and adding to total bill
+        subtotal = self.get_subtotal()
+        service_charge_calc = (subtotal * service_charge)
+        the_total = (subtotal + service_charge_calc)
 
-        def_total = {
-            'Service Charge': f'£{service_charge_calc}',
-            'Sub Total': f'£{subtotal}',
-            'Total': f'£{the_total}'
-        }
-        return def_total
+        # presenting a dictionary of values in gbp
+        return {
+            'Sub Total': '£%0.2f' % subtotal,
+            'Service Charge': '£%0.2f' % service_charge_calc,
+            'Total': '£%0.2f' % the_total}
 
 
     def split_bill(self):
-        total_bill = self.get_total()
-        split = total_bill / self.num_of_people
-        return split
-
-
+        # splitting bill between people at table, rounded to the penny
+        return round((self.get_subtotal()) / self.num_of_people, 2)
